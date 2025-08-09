@@ -36,11 +36,13 @@
 
 ### 高度な機能
 
-- **言語切り替え**: 検索後でも言語を変更して再検索可能
-- **個別エラー表示**: 特定の検索エンジンでエラーが発生しても他の結果は表示継続
-- **プログレッシブローディング**: 検索結果が準備でき次第順次表示
-- **直接検索リンク**: 各検索エンジンのヘッダーから直接そのエンジンで検索可能
-- **テーマ切り替え**: ラジオボタンでライトモードとダークモードを選択可能
+- **🌐 言語切り替え**: 検索後でも言語を変更して再検索可能
+- **⚠️ 個別エラー表示**: 特定の検索エンジンでエラーが発生しても他の結果は表示継続
+- **⚡ プログレッシブローディング**: 検索結果が準備でき次第順次表示
+- **🔗 直接検索リンク**: 各検索エンジンのヘッダーから直接そのエンジンで検索可能
+- **🌙 テーマ切り替え**: ラジオボタンでライトモードとダークモードを選択可能
+- **💾 設定の永続化**: テーマ設定がローカルストレージに自動保存
+- **🔍 システムテーマ検出**: OSの設定に基づく初期テーマの自動選択
 
 ## 技術仕様
 
@@ -50,10 +52,15 @@
 - **JavaScript (ES6+)**: モジュラー設計のVanilla JavaScript
 
 ### アーキテクチャ
-- **MVC パターン**: 明確な責任分離
-- **アダプターパターン**: 各検索エンジンの統一インターフェース
-- **エラーハンドリング**: 包括的なエラー処理システム
-- **キャッシュシステム**: LRU方式による効率的なキャッシュ管理
+- **🏗️ レイヤードアーキテクチャ**: UI層、アプリケーション層、アダプター層の明確な分離
+- **🔌 アダプターパターン**: 各検索エンジンの統一インターフェース
+- **🎭 ファサードパターン**: MultiSearchAppによる複雑性の隠蔽
+- **👀 オブザーバーパターン**: 検索進捗の通知システム
+- **⚠️ エラーハンドリング**: 包括的なエラー処理システム
+- **💾 キャッシュシステム**: LRU方式による効率的なキャッシュ管理
+- **🎨 テーマシステム**: CSS変数による動的テーマ切り替え
+
+詳細なアーキテクチャについては [logicalarchitecture.md](logicalarchitecture.md) をご覧ください。
 
 ### パフォーマンス
 - **並列処理**: Promise.allSettledによる同時検索実行
@@ -72,8 +79,8 @@
 
 1. リポジトリをクローン:
 ```bash
-git clone https://github.com/masatamo-aws/kiro-multiserchengine.git
-cd kiro-multiserchengine
+git clone https://github.com/masatamo-aws/kiro-multisearchengine.git
+cd kiro-multisearchengine
 ```
 
 2. Webサーバーで起動:
@@ -106,24 +113,32 @@ http://localhost:8000
 ```
 kiro-multiserchengine/
 ├── index.html              # メインHTML
+├── test.html              # テストページ
+├── README.md              # プロジェクト説明
+├── CHANGELOG.md           # 変更履歴
+├── requirements.md        # 要件定義書
+├── design.md             # 設計書
+├── tasks.md              # 実装計画
+├── logicalarchitecture.md # 論理アーキテクチャ文書
+├── package.json          # プロジェクト設定
+├── .gitignore           # Git除外設定
 ├── css/
-│   └── style.css          # スタイルシート
-├── js/
-│   ├── app.js             # メインアプリケーション
-│   ├── searchManager.js   # 検索管理
-│   ├── ui.js              # UI管理
-│   ├── languageManager.js # 言語管理
-│   ├── themeManager.js    # テーマ管理
-│   ├── errorHandler.js    # エラーハンドリング
-│   ├── searchCache.js     # キャッシュ管理
-│   └── adapters/          # 検索エンジンアダプター
-│       ├── googleSearchAdapter.js
-│       ├── bingSearchAdapter.js
-│       ├── yahooSearchAdapter.js
-│       ├── duckduckgoSearchAdapter.js
-│       ├── youtubeSearchAdapter.js
-│       └── baiduSearchAdapter.js
-└── README.md              # このファイル
+│   └── style.css        # スタイルシート（ダークモード対応）
+└── js/
+    ├── app.js           # メインアプリケーション
+    ├── searchManager.js # 検索管理
+    ├── ui.js           # UI管理
+    ├── languageManager.js # 言語管理
+    ├── themeManager.js  # テーマ管理
+    ├── errorHandler.js  # エラーハンドリング
+    ├── searchCache.js   # キャッシュ管理
+    └── adapters/        # 検索エンジンアダプター
+        ├── googleSearchAdapter.js
+        ├── bingSearchAdapter.js
+        ├── yahooSearchAdapter.js
+        ├── duckduckgoSearchAdapter.js
+        ├── youtubeSearchAdapter.js
+        └── baiduSearchAdapter.js
 ```
 
 ## カスタマイズ
@@ -187,31 +202,24 @@ MIT License
 
 プルリクエストや課題報告を歓迎します。
 
+## ドキュメント
+
+- **[CHANGELOG.md](CHANGELOG.md)**: 詳細な変更履歴
+- **[requirements.md](requirements.md)**: 要件定義書
+- **[design.md](design.md)**: 設計書
+- **[tasks.md](tasks.md)**: 実装計画
+- **[logicalarchitecture.md](logicalarchitecture.md)**: 論理アーキテクチャ文書
+
 ## 更新履歴
 
-### v1.3.0 (2025-01-08)
-- ダークモード機能追加
-- ライトモードとダークモードの切り替え対応
-- テーマ設定の永続化（ローカルストレージ）
-- システムテーマの自動検出
+最新の変更履歴については [CHANGELOG.md](CHANGELOG.md) をご覧ください。
 
-### v1.2.0 (2025-01-08)
-- 検索エンジン直接リンク機能追加
-- 各検索エンジンのヘッダーから直接検索可能
-- 新しいタブで検索結果を開く機能
-
-### v1.1.0 (2025-01-08)
-- Baidu（百度）検索エンジンサポート追加
-- 6つの検索エンジンで同時検索が可能
-- 中国語検索の最適化
-
-### v1.0.0 (2025-01-08)
-- 初回リリース
-- 5つの検索エンジンサポート
-- 多言語対応
-- レスポンシブデザイン
-- キャッシュ機能
-- エラーハンドリング
+### 最新版 v1.3.0 (2025-01-08)
+- ✨ ダークモード機能追加
+- 🎨 ライトモードとダークモードの切り替え対応
+- 💾 テーマ設定の永続化（ローカルストレージ）
+- 🔍 システムテーマの自動検出
+- 📚 論理アーキテクチャ文書の追加
 
 ## サポート
 
