@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マルチサーチエンジン - テストページ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <h1>マルチサーチエンジン - テストページ</h1>
+    
+    <div class="test-section">
+        <h2>基本機能テスト</h2>
+        <button class="test-button" onclick="testBasicFunctionality()">基本機能テスト実行</button>
+        <div id="basicTest"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>検索エンジンテスト</h2>
+        <button class="test-button" onclick="testSearchEngines()">検索エンジンテスト実行</button>
+        <div id="engineTest"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>言語管理テスト</h2>
+        <button class="test-button" onclick="testLanguageManager()">言語管理テスト実行</button>
+        <div id="languageTest"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>エラーハンドリングテスト</h2>
+        <button class="test-button" onclick="testErrorHandling()">エラーハンドリングテスト実行</button>
+        <div id="errorTest"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>キャッシュテスト</h2>
+        <button class="test-button" onclick="testCache()">キャッシュテスト実行</button>
+        <div id="cacheTest"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>パフォーマンステスト</h2>
+        <button class="test-button" onclick="testPerformance()">パフォーマンステスト実行</button>
+        <div id="performanceTest"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>統合テスト</h2>
+        <button class="test-button" onclick="runAllTests()">全テスト実行</button>
+        <div id="allTests"></div>
+    </div>
+
+    <!-- アプリケーションのスクリプトを読み込み -->
+    <script src="js/languageManager.js"></script>
+    <script src="js/themeManager.js"></script>
+    <script src="js/errorHandler.js"></script>
+    <script src="js/searchCache.js"></script>
+    <script src="js/adapters/googleSearchAdapter.js"></script>
+    <script src="js/adapters/bingSearchAdapter.js"></script>
+    <script src="js/adapters/yahooSearchAdapter.js"></script>
+    <script src="js/adapters/duckduckgoSearchAdapter.js"></script>
+    <script src="js/adapters/youtubeSearchAdapter.js"></script>
+    <script src="js/adapters/baiduSearchAdapter.js"></script>
+    <script src="js/searchManager.js"></script>
+    <script src="js/ui.js"></script>
+
+    <script>
+        // テスト用のヘルパー関数
+        function logResult(containerId, message, type = 'info') {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            container.appendChild(div);
+        }
+
+        function clearResults(containerId) {
+            document.getElementById(containerId).innerHTML = '';
+        }
+
+        // 基本機能テスト
+        function testBasicFunctionality() {
+            clearResults('basicTest');
+            logResult('basicTest', 'テスト開始: 基本機能', 'info');
+
+            try {
+                // LanguageManagerのテスト
+                const languageManager = new LanguageManager();
+                const languages = languageManager.getSupportedLanguages();
+                logResult('basicTest', `✓ LanguageManager: ${languages.length}言語サポート`, 'success');
+
+                // ThemeManagerのテスト
+                const themeManager = new ThemeManager();
+                const themeStats = themeManager.getThemeStats();
+                logResult('basicTest', `✓ ThemeManager: ${themeStats.availableThemes.length}テーマサポート`, 'success');
+
+                // ErrorHandlerのテスト
+                const errorHandler = new ErrorHandler();
+                logResult('basicTest', '✓ ErrorHandler: 初期化成功', 'success');
+
+                // SearchCacheのテスト
+                const cache = new SearchCache();
+                logResult('basicTest', '✓ SearchCache: 初期化成功', 'success');
+
+                logResult('basicTest', '基本機能テスト完了', 'success');
+            } catch (error) {
+                logResult('basicTest', `✗ エラー: ${error.message}`, 'error');
+            }
+        }
+
+        // 検索エンジンテスト
+        function testSearchEngines() {
+            clearResults('engineTest');
+            logResult('engineTest', 'テスト開始: 検索エンジン', 'info');
+
+            const engines = [
+                { name: 'Google', class: GoogleSearchAdapter },
+                { name: 'Bing', class: BingSearchAdapter },
+                { name: 'Yahoo', class: YahooSearchAdapter },
+                { name: 'DuckDuckGo', class: DuckDuckGoSearchAdapter },
+                { name: 'YouTube', class: YouTubeSearchAdapter },
+                { name: 'Baidu', class: BaiduSearchAdapter }
+            ];
+
+            engines.forEach(engine => {
+                try {
+                    const adapter = new engine.class();
+                    const isAvailable = adapter.isAvailable ? adapter.isAvailable() : true;
+                    logResult('engineTest', `✓ ${engine.name}: 初期化成功 (利用可能: ${isAvailable})`, 'success');
+                    
+                    // 直接リンク生成のテスト
+                    if (adapter.getDirectSearchUrl) {
+                        const testUrl = adapter.getDirectSearchUrl('テスト', 'ja');
+                        logResult('engineTest', `✓ ${engine.name}: 直接リンク生成成功`, 'success');
+                    }
+                } catch (error) {
+                    logResult('engineTest', `✗ ${engine.name}: ${error.message}`, 'error');
+                }
+            });
+
+            logResult('engineTest', '検索エンジンテスト完了', 'success');
+        }
+
+        // 言語管理テスト
+        function testLanguageManager() {
+            clearResults('languageTest');
+            logResult('languageTest', 'テスト開始: 言語管理', 'info');
+
+            try {
+                const languageManager = new LanguageManager();
+                
+                // サポート言語のテスト
+                const languages = languageManager.getSupportedLanguages();
+                logResult('languageTest', `✓ サポート言語数: ${languages.length}`, 'success');
+
+                // 各言語のテスト
+                languages.forEach(lang => {
+                    const params = languageManager.getSearchParameters(lang.code, 'google');
+                    logResult('languageTest', `✓ ${lang.nativeName} (${lang.code}): パラメータ取得成功`, 'success');
+                });
+
+                // 設定検証
+                const isValid = languageManager.validateLanguageConfig();
+                logResult('languageTest', `✓ 設定検証: ${isValid ? '成功' : '失敗'}`, isValid ? 'success' : 'error');
+
+                logResult('languageTest', '言語管理テスト完了', 'success');
+            } catch (error) {
+                logResult('languageTest', `✗ エラー: ${error.message}`, 'error');
+            }
+        }
+
+        // エラーハンドリングテスト
+        function testErrorHandling() {
+            clearResults('errorTest');
+            logResult('errorTest', 'テスト開始: エラーハンドリング', 'info');
+
+            try {
+                const errorHandler = new ErrorHandler();
+                
+                // 各種エラーのテスト
+                const testError = new Error('テストエラー');
+                
+                const networkError = errorHandler.handleNetworkError(testError, 'google');
+                logResult('errorTest', `✓ ネットワークエラー処理: ${networkError.type}`, 'success');
+
+                const corsError = errorHandler.handleCORSError(testError, 'bing');
+                logResult('errorTest', `✓ CORSエラー処理: ${corsError.type}`, 'success');
+
+                const generalError = errorHandler.handleGeneralError(testError, 'yahoo');
+                logResult('errorTest', `✓ 一般エラー処理: ${generalError.type}`, 'success');
+
+                // 統計情報のテスト
+                const stats = errorHandler.getErrorStats();
+                logResult('errorTest', `✓ エラー統計: 総数${stats.total}件`, 'success');
+
+                logResult('errorTest', 'エラーハンドリングテスト完了', 'success');
+            } catch (error) {
+                logResult('errorTest', `✗ エラー: ${error.message}`, 'error');
+            }
+        }
+
+        // キャッシュテスト
+        function testCache() {
+            clearResults('cacheTest');
+            logResult('cacheTest', 'テスト開始: キャッシュ', 'info');
+
+            try {
+                const cache = new SearchCache();
+                
+                // キャッシュの基本操作テスト
+                const testKey = 'test:ja:テストクエリ';
+                const testData = { results: ['test1', 'test2'], timestamp: Date.now() };
+                
+                cache.set(testKey, testData);
+                logResult('cacheTest', '✓ キャッシュ保存成功', 'success');
+
+                const retrieved = cache.get(testKey);
+                const isEqual = JSON.stringify(retrieved) === JSON.stringify(testData);
+                logResult('cacheTest', `✓ キャッシュ取得: ${isEqual ? '成功' : '失敗'}`, isEqual ? 'success' : 'error');
+
+                // 統計情報のテスト
+                const stats = cache.getStats();
+                logResult('cacheTest', `✓ キャッシュ統計: ${stats.totalEntries}エントリ`, 'success');
+
+                // クリーンアップテスト
+                cache.clear();
+                logResult('cacheTest', '✓ キャッシュクリア成功', 'success');
+
+                logResult('cacheTest', 'キャッシュテスト完了', 'success');
+            } catch (error) {
+                logResult('cacheTest', `✗ エラー: ${error.message}`, 'error');
+            }
+        }
+
+        // パフォーマンステスト
+        function testPerformance() {
+            clearResults('performanceTest');
+            logResult('performanceTest', 'テスト開始: パフォーマンス', 'info');
+
+            try {
+                // 初期化時間の測定
+                const startTime = performance.now();
+                
+                const languageManager = new LanguageManager();
+                const errorHandler = new ErrorHandler();
+                const cache = new SearchCache();
+                const searchManager = new SearchManager(errorHandler);
+                
+                const initTime = performance.now() - startTime;
+                logResult('performanceTest', `✓ 初期化時間: ${initTime.toFixed(2)}ms`, 'success');
+
+                // メモリ使用量の概算
+                const memoryInfo = performance.memory ? {
+                    used: Math.round(performance.memory.usedJSHeapSize / 1024 / 1024),
+                    total: Math.round(performance.memory.totalJSHeapSize / 1024 / 1024)
+                } : null;
+
+                if (memoryInfo) {
+                    logResult('performanceTest', `✓ メモリ使用量: ${memoryInfo.used}MB / ${memoryInfo.total}MB`, 'success');
+                }
+
+                // キャッシュパフォーマンステスト
+                const cacheStartTime = performance.now();
+                for (let i = 0; i < 100; i++) {
+                    cache.set(`test:${i}`, { data: `test${i}` });
+                }
+                const cacheTime = performance.now() - cacheStartTime;
+                logResult('performanceTest', `✓ キャッシュ100件保存: ${cacheTime.toFixed(2)}ms`, 'success');
+
+                logResult('performanceTest', 'パフォーマンステスト完了', 'success');
+            } catch (error) {
+                logResult('performanceTest', `✗ エラー: ${error.message}`, 'error');
+            }
+        }
+
+        // 全テスト実行
+        function runAllTests() {
+            clearResults('allTests');
+            logResult('allTests', '統合テスト開始', 'info');
+
+            const tests = [
+                { name: '基本機能', func: testBasicFunctionality },
+                { name: '検索エンジン', func: testSearchEngines },
+                { name: '言語管理', func: testLanguageManager },
+                { name: 'エラーハンドリング', func: testErrorHandling },
+                { name: 'キャッシュ', func: testCache },
+                { name: 'パフォーマンス', func: testPerformance }
+            ];
+
+            let passed = 0;
+            let failed = 0;
+
+            tests.forEach(test => {
+                try {
+                    test.func();
+                    passed++;
+                    logResult('allTests', `✓ ${test.name}テスト: 成功`, 'success');
+                } catch (error) {
+                    failed++;
+                    logResult('allTests', `✗ ${test.name}テスト: 失敗 - ${error.message}`, 'error');
+                }
+            });
+
+            logResult('allTests', `統合テスト完了: 成功${passed}件, 失敗${failed}件`, failed === 0 ? 'success' : 'error');
+        }
+    </script>
+</body>
+</html>

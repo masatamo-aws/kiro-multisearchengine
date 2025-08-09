@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マルチサーチエンジン</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>マルチサーチエンジン</h1>
+            <p>複数の検索エンジンで同時検索</p>
+            <div class="theme-selector">
+                <div class="theme-option">
+                    <input type="radio" id="theme-light" name="theme" value="light" checked>
+                    <label for="theme-light">☀️ ライト</label>
+                </div>
+                <div class="theme-option">
+                    <input type="radio" id="theme-dark" name="theme" value="dark">
+                    <label for="theme-dark">🌙 ダーク</label>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="search-section">
+                <div class="search-form">
+                    <div class="language-selector">
+                        <label for="language">言語:</label>
+                        <select id="language">
+                            <option value="ja">日本語</option>
+                            <option value="en">English</option>
+                            <option value="zh">中文</option>
+                            <option value="ko">한국어</option>
+                        </select>
+                    </div>
+                    <div class="search-input">
+                        <input type="text" id="searchQuery" placeholder="検索キーワードを入力してください">
+                        <button id="searchButton">検索</button>
+                        <button id="clearButton">クリア</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="search-engine-results" id="googleResults">
+                    <h3>Google</h3>
+                    <div class="loading" style="display: none;">検索中...</div>
+                    <div class="error" style="display: none;"></div>
+                    <div class="results"></div>
+                </div>
+
+                <div class="search-engine-results" id="bingResults">
+                    <h3>Bing</h3>
+                    <div class="loading" style="display: none;">検索中...</div>
+                    <div class="error" style="display: none;"></div>
+                    <div class="results"></div>
+                </div>
+
+                <div class="search-engine-results" id="yahooResults">
+                    <h3>Yahoo Japan</h3>
+                    <div class="loading" style="display: none;">検索中...</div>
+                    <div class="error" style="display: none;"></div>
+                    <div class="results"></div>
+                </div>
+
+                <div class="search-engine-results" id="duckduckgoResults">
+                    <h3>DuckDuckGo</h3>
+                    <div class="loading" style="display: none;">検索中...</div>
+                    <div class="error" style="display: none;"></div>
+                    <div class="results"></div>
+                </div>
+
+                <div class="search-engine-results" id="youtubeResults">
+                    <h3>YouTube</h3>
+                    <div class="loading" style="display: none;">検索中...</div>
+                    <div class="error" style="display: none;"></div>
+                    <div class="results"></div>
+                </div>
+
+                <div class="search-engine-results" id="baiduResults">
+                    <h3>Baidu</h3>
+                    <div class="loading" style="display: none;">検索中...</div>
+                    <div class="error" style="display: none;"></div>
+                    <div class="results"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <noscript>
+        <div class="no-js-message">
+            このアプリケーションを使用するにはJavaScriptを有効にしてください。
+        </div>
+    </noscript>
+
+    <script src="js/languageManager.js"></script>
+    <script src="js/themeManager.js"></script>
+    <script src="js/errorHandler.js"></script>
+    <script src="js/searchCache.js"></script>
+    <script src="js/adapters/googleSearchAdapter.js"></script>
+    <script src="js/adapters/bingSearchAdapter.js"></script>
+    <script src="js/adapters/yahooSearchAdapter.js"></script>
+    <script src="js/adapters/duckduckgoSearchAdapter.js"></script>
+    <script src="js/adapters/youtubeSearchAdapter.js"></script>
+    <script src="js/adapters/baiduSearchAdapter.js"></script>
+    <script src="js/searchManager.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
