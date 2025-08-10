@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2025-01-08
+
+### Added
+- **アプリケーションスクリーンショット**: ライトモードとダークモードのスクリーンショットを追加
+- **包括的ドキュメント更新**: 全ドキュメントファイルの最新情報への更新
+- **プロジェクト完成度の向上**: 全機能の実装完了とドキュメント整備
+
+### Changed
+- **README.md**: スクリーンショットセクションの追加、最新機能の反映、GitHubリポジトリURLの統一
+- **design.md**: UI/UXデザイン詳細、カラーパレット、技術アーキテクチャの追加
+- **requirements.md**: プロジェクト目標の明確化、スクリーンショットの追加
+- **tasks.md**: 実装状況の更新、完了タスクのマーク、新規タスクの追加
+- **logicalarchitecture.md**: バージョン履歴、技術的負債、改善計画の追加
+- **package.json**: バージョン1.3.1への更新
+
+### Fixed
+- **ドキュメント整合性**: 全ドキュメント間の情報統一
+- **スクリーンショットURL**: GitHubリポジトリの正しいパスに統一
+
+### Documentation
+- 全ドキュメント間の相互参照リンクの整備
+- プロジェクトの現状を正確に反映した文書化
+- 視覚的要素（スクリーンショット、絵文字）の統一
+- 実装完了状況の正確な反映
+
 ## [1.3.0] - 2025-01-08
 
 ### Added
@@ -116,7 +141,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 6. GitHubリリースの作成
 
 ### Future Roadmap
-- **v1.4.0**: 検索履歴機能
-- **v1.5.0**: お気に入り機能
-- **v1.6.0**: 検索フィルター機能
-- **v2.0.0**: PWA対応、オフライン機能
+- **v1.4.0**: 検索履歴機能、お気に入り機能
+- **v1.5.0**: 検索フィルター機能、エクスポート機能
+- **v1.6.0**: キーボードショートカット、検索統計
+- **v2.0.0**: PWA対応、オフライン機能、AI統合

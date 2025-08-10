@@ -2,7 +2,15 @@
 
 ## 概要
 
-マルチサーチエンジンアプリケーションは、複数の検索エンジンに対して同時に検索クエリを実行し、結果を並列表示するWebアプリケーションです。フロントエンドはHTML/CSS/JavaScriptで構築し、各検索エンジンのAPIまたはスクレイピング手法を使用して検索結果を取得します。
+マルチサーチエンジンアプリケーション（v1.3.1）は、6つの検索エンジン（Google、Bing、Yahoo Japan、DuckDuckGo、YouTube、Baidu）に対して同時に検索クエリを実行し、結果を並列表示するWebアプリケーションです。ダークモード対応、多言語サポート、検索エンジン直接リンク機能を備えたモダンなWebアプリケーションとして設計されています。
+
+## スクリーンショット
+
+### ライトモード
+![ライトモード](https://raw.githubusercontent.com/masatamo-aws/kiro-multisearchengine/main/assets/image/Light%20Mode.png)
+
+### ダークモード
+![ダークモード](https://raw.githubusercontent.com/masatamo-aws/kiro-multisearchengine/main/assets/image/Dark%20Mode.png)
 
 ## アーキテクチャ
 
@@ -257,3 +265,60 @@ class ErrorHandler {
 - CSS変数を使用したテーマシステム
 - ローカルストレージによる設定の永続化
 - システムの設定に基づく初期テーマの自動検出
+- スムーズなトランジション効果
+- メタテーマカラーの自動更新
+
+## UI/UXデザイン
+
+### デザイン原則
+1. **シンプルさ**: 直感的で使いやすいインターフェース
+2. **一貫性**: 全体を通じた統一されたデザイン言語
+3. **アクセシビリティ**: すべてのユーザーが利用可能
+4. **レスポンシブ**: あらゆるデバイスサイズに対応
+5. **パフォーマンス**: 高速で滑らかな操作感
+
+### カラーパレット
+#### ライトモード
+- プライマリ背景: `#f5f5f5`
+- セカンダリ背景: `#ffffff`
+- テキスト: `#333333`
+- アクセント: `#3498db`
+
+#### ダークモード
+- プライマリ背景: `#1a1a1a`
+- セカンダリ背景: `#2d2d2d`
+- テキスト: `#e0e0e0`
+- アクセント: `#4a90e2`
+
+### タイポグラフィ
+- フォントファミリー: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+- 見出し: 2.5em (h1), 1.2em (h3)
+- 本文: 16px
+- 小文字: 0.9em
+
+## 技術アーキテクチャの詳細
+
+### フロントエンド技術スタック
+- **HTML5**: セマンティックマークアップ
+- **CSS3**: CSS Grid, Flexbox, CSS Variables
+- **JavaScript ES6+**: モジュラー設計
+- **Web APIs**: Fetch API, LocalStorage API, matchMedia API
+
+### ファイル構成
+```
+kiro-multiserchengine/
+├── index.html              # メインアプリケーション
+├── assets/
+│   └── image/             # スクリーンショット
+├── css/
+│   └── style.css         # テーマ対応スタイル
+└── js/
+    ├── app.js            # メインアプリケーション
+    ├── themeManager.js   # テーマ管理
+    ├── searchManager.js  # 検索管理
+    ├── ui.js            # UI管理
+    ├── languageManager.js # 言語管理
+    ├── errorHandler.js   # エラーハンドリング
+    ├── searchCache.js    # キャッシュ管理
+    └── adapters/         # 検索エンジンアダプター
+```

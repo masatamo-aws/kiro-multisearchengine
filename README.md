@@ -2,6 +2,14 @@
 
 複数の検索エンジン（Google、Bing、Yahoo Japan、DuckDuckGo、YouTube、Baidu）で同時に検索を実行し、結果を並列表示するWebアプリケーションです。
 
+## スクリーンショット
+
+### ライトモード
+![ライトモード](https://raw.githubusercontent.com/masatamo-aws/kiro-multisearchengine/main/assets/image/Light%20Mode.png)
+
+### ダークモード
+![ダークモード](https://raw.githubusercontent.com/masatamo-aws/kiro-multisearchengine/main/assets/image/Dark%20Mode.png)
+
 ## 機能
 
 - **複数検索エンジン対応**: 6つの主要検索エンジンで同時検索
@@ -113,7 +121,6 @@ http://localhost:8000
 ```
 kiro-multiserchengine/
 ├── index.html              # メインHTML
-├── test.html              # テストページ
 ├── README.md              # プロジェクト説明
 ├── CHANGELOG.md           # 変更履歴
 ├── requirements.md        # 要件定義書
@@ -214,7 +221,14 @@ MIT License
 
 最新の変更履歴については [CHANGELOG.md](CHANGELOG.md) をご覧ください。
 
-### 最新版 v1.3.0 (2025-01-08)
+### 最新版 v1.3.1 (2025-01-08)
+- 📸 アプリケーションスクリーンショットの追加
+- 📖 包括的ドキュメント整備と統一
+- � GーitHubリポジトリURLの統一
+- ✅ 全機能実装完了
+- 📚 プロジェクト完成度の向上
+
+### v1.3.0 (2025-01-08)
 - ✨ ダークモード機能追加
 - 🎨 ライトモードとダークモードの切り替え対応
 - 💾 テーマ設定の永続化（ローカルストレージ）
